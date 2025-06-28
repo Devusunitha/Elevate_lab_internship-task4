@@ -1,0 +1,82 @@
+﻿USE CollegeEventDB;
+
+
+1. Count the total number of students
+SELECT COUNT(*) AS total_students FROM Student;
+
+
+2. Count the number of students by department
+SELECT dept, COUNT(*) AS student_count
+FROM Student
+GROUP BY dept;
+
+
+ 3. Find the average venue capacity
+SELECT AVG(capacity) AS avg_capacity FROM Venue;
+
+
+ 4. Total number of events conducted by each organizer
+SELECT organizer_id, COUNT(*) AS total_events
+FROM Event
+GROUP BY organizer_id;
+
+
+5. Number of teams registered per event
+SELECT event_id, COUNT(*) AS team_count
+FROM Participation
+GROUP BY event_id;
+
+
+6. Count the number of events held at each venue
+SELECT venue_id, COUNT(*) AS event_count
+FROM Event
+GROUP BY venue_id;
+
+
+7. Count the number of participants with 'Confirmed' status
+SELECT status, COUNT(*) AS count
+FROM Participation
+WHERE status = 'Confirmed'
+GROUP BY status;
+
+
+8. Total number of results declared for each event
+SELECT event_id, COUNT(*) AS results_declared
+FROM Result
+GROUP BY event_id;
+
+
+9. Events with more than 1 result declared (using HAVING)
+SELECT event_id, COUNT(*) AS declared
+FROM Result
+GROUP BY event_id
+HAVING COUNT(*) > 1;
+
+
+10. Maximum venue capacity by location
+SELECT location, MAX(capacity) AS max_capacity
+FROM Venue
+GROUP BY location;
+
+
+11. List departments having more than 1 student
+SELECT dept, COUNT(*) AS total
+FROM Student
+GROUP BY dept
+HAVING COUNT(*) > 1;
+
+
+12. Round average student year
+SELECT ROUND(AVG(year), 2) AS avg_year
+FROM Student;
+
+
+13. Count number of distinct departments
+SELECT COUNT(DISTINCT dept) AS dept_count
+FROM Student;
+
+
+14. Number of teams led by each student
+SELECT leader_id, COUNT(*) AS teams_led
+FROM Team
+GROUP BY leader_id;
